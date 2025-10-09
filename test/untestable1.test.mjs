@@ -7,4 +7,9 @@ describe("Untestable 1: days until Christmas", () => {
     const dec1 = new Date(2000, 12 - 1, 1);
     expect(daysUntilChristmas(dec1)).to.equals(24);
   });
+
+  test("should be 24 + 30 = 54 from November 1st", () => {
+    const nov1 = new Date(2000, 11 - 1, 1);
+    expect(daysUntilChristmas(nov1)).to.equals(54);
+  });
 });
