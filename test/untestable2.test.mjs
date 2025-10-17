@@ -19,4 +19,7 @@ describe("Untestable 2: a dice game", () => {
 		};
 		expect(diceRoll(rand)).to.equals(6);
 	});
+	test("diceRoll works with Math.random", () => {
+		expect(diceRoll(Math.random)).to.be.a("number")
+	})
 });
