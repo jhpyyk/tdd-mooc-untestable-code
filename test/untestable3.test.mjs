@@ -14,7 +14,7 @@ describe("Untestable 3: CSV file parsing", () => {
 			"Loid,Forger,,Male\nAnya,Forger,6,Female\nYor,Forger,27,Female\n"
 		);
 	});
-	test("convert person csv row to person object", async () => {
+	test("convert person csv row to person object", () => {
 		expect(csvRowToPerson(["Yor", "Forger", "27", "Female"])).to.deep.equal(
 			{
 				firstName: "Yor",
@@ -24,5 +24,27 @@ describe("Untestable 3: CSV file parsing", () => {
 			}
 		);
 	});
+	test("parse persons from a csv file", async () => {
+		expect(await parsePeopleCsv(peopleCsvPath)).to.deep.equal([
 
+			{
+				firstName: "Loid",
+				lastName: "Forger",
+				gender: "Male",
+				age: undefined
+			},
+			{
+				firstName: "Anya",
+				lastName: "Forger",
+				gender: "Female",
+				age: 6
+			},
+			{
+				firstName: "Yor",
+				lastName: "Forger",
+				gender: "Female",
+				age: 27
+			},
+		])
+	})
 });
