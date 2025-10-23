@@ -11,6 +11,18 @@ export const readFromDisk = async (path: string) => {
 	const file = await readFile(path, { encoding: "utf8" })
 	return file
 }
+export const csvRowToPerson = (row: string) => {
+	const age = parseInt(row[2]) ?? undefined
+	const person = {
+		firstName: row[0],
+		lastName: row[1],
+		gender: row[3],
+		age: age
+	}
+	return person
+}
+
+
 
 export async function parsePeopleCsv(filePath: string) {
 	const csvData = await readFromDisk(filePath);
@@ -18,16 +30,6 @@ export async function parsePeopleCsv(filePath: string) {
 		skip_empty_lines: true,
 		trim: true,
 	});
-	return records.map(([firstName, lastName, age, gender]) => {
-		const person = {
-			firstName,
-			lastName,
-			gender: gender.charAt(0).toLowerCase(),
-			age: parseInt(age) ?? undefined
-		};
-		if (age !== "") {
-			person.age = parseInt(age);
-		}
-		return person;
-	});
+	const persons = records.map(row => csvRowToPerson(row))
+	return persons
 }
